@@ -5,5 +5,4 @@ WORKDIR $APP_HOME
 COPY . ./
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
-RUN source .env
 CMD ["python", "main.py"]
