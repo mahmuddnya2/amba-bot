@@ -7,7 +7,7 @@ from utils.utils import format_process, only_document, with_caption
 def send_welcome(message):
     bot.send_message(
         chat_id=message.chat.id,
-        text="gunakan command /query untuk menginputkan query atau langsung kirimkan file txt jika tidak ingin menggunakan query",
+        text="langsung aja kirim file txt dan jika ingin memasukkan query masukan saja ke captionnya, ntar outputnya ada querynya langsung, contoh query :\nSELECT * FROM pelanggan WHERE kota IN ($);\nmaka nnt isi dari txt yang anda kirimkan akan di letakkan di keyword $\n*Note untuk outputnya masih dalam format (1, 'output')",
     )
 
 
