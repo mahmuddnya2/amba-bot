@@ -7,7 +7,8 @@ from utils.utils import format_process, only_document, with_caption
 def send_welcome(message):
     bot.send_message(
         chat_id=message.chat.id,
-        text="langsung aja kirim file txt dan jika ingin memasukkan query masukan saja ke captionnya, ntar outputnya ada querynya langsung, contoh query :\nSELECT * FROM pelanggan WHERE kota IN ($);\nmaka nnt isi dari txt yang anda kirimkan akan di letakkan di keyword $\n*Note untuk outputnya masih dalam format (1, 'output')",
+        text="*===== Cara Penggunaan =====*\n\nKirimkan file txt dengan caption query dan format untuk membungkus isi dari file txtnya, *Contoh : *\n\nSELECT order, customer FROM orders WHERE status IN ($); format (1, $)\n\ndan misal file yang anda inputkan hanya berisi 1 kata yaitu *contoh isi file*\n*Maka Outputnya akan seperti dibawah ini*\n\nSELECT order, customer FROM orders WHERE status IN (1, 'contoh isi file');\n\nJangan menggunakan *Enter* untuk memisahkan query dan format, misalnya\n\nSELECT order, customer FROM orders WHERE status IN ($);\nformat (1, $)\n\n==== Note ====\n\n- Jangan lupa untuk memberikan keyword *$* pada query dan pada format\n- Anda bisa juga mengirimkan file tanpa caption namun formatnya menggunakan default format",
+        parse_mode="Markdown",
     )
 
 
