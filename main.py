@@ -38,10 +38,7 @@ def handle_limit_input(message):
         file_name, _ = user_limits[chat_id]
         user_limits[chat_id] = (file_name, limit)
 
-        print(query)
-
         if not query or query[chat_id] == ():
-            print("tidak ada query")
             format_process(file_name, limit, chat_id)
         else:
             first = query[chat_id][0]

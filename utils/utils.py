@@ -5,14 +5,11 @@ valid_input = ["/start", "/skip"]
 
 
 def known_input(message):
-    print(message.text)
     if message.text not in valid_input:
         bot.reply_to(message, "Input yang anda masukkan tidak Valid")
 
 
 def format_process(file_name, limit, chat_id, first="", second=""):
-    print(first)
-    print(second)
     # Membaca konten file
     with open(file_name, "r") as f:
         lines = f.readlines()  # Baca semua baris sekaligus
@@ -42,8 +39,7 @@ def format_process(file_name, limit, chat_id, first="", second=""):
             formatted_lines[-1] = formatted_lines[-1][:-1]
 
         with open(output_file_name, "w") as output_file:
-            print()
-            output_file.write("\n".join(formatted_lines))
+            output_file.write(f"{first}" + "\n".join(formatted_lines) + f"{second}")
 
     # Mengirimkan file yang telah diformat
     try:
