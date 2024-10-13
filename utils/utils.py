@@ -1,15 +1,10 @@
 from utils.model import bot, user_limits, query
 import os
 
-valid_input = ["/start", "/skip"]
 
-
-def known_input(message):
-    if message.text not in valid_input:
-        bot.reply_to(message, "Input yang anda masukkan tidak Valid")
-
-
-def format_process(file_name, limit, chat_id, first="", second=""):
+def format_process(
+    file_name, limit, chat_id, first="", second="", first_format="(", second_format=")"
+):
     # Membaca konten file
     with open(file_name, "r") as f:
         lines = f.readlines()  # Baca semua baris sekaligus
@@ -32,7 +27,7 @@ def format_process(file_name, limit, chat_id, first="", second=""):
         # Menyimpan hasil format ke file baru
         formatted_lines = []
         for line in current_lines:
-            formatted_line = f"(1, '{line.strip()}'),"
+            formatted_line = f"{first_format}'{line.strip()}'{second_format},"
             formatted_lines.append(formatted_line)
 
         if formatted_lines:
@@ -98,8 +93,18 @@ def only_document(message):
 
 
 def with_caption(message):
+    # pisahkan query dengan format dan kemudian ambil formatnya saja
+    sparate_format = message.caption
+    sparate_format = sparate_format.split("format")
+    sparate_format = sparate_format[1].split("$")
+
+    first_format = sparate_format[0]
+    second_format = sparate_format[1]
+
+    # pisahkan query dan format dan kemudian ambil formatnya saja
     sparate_messsage = message.caption
-    sparate_messsage = sparate_messsage.split("$")
+    sparate_messsage = sparate_messsage.split("format")
+    sparate_messsage = sparate_messsage[0].split("$")
 
     if len(sparate_messsage) < 2:
         bot.send_message(
@@ -110,7 +115,8 @@ def with_caption(message):
     first = sparate_messsage[0]
     second = sparate_messsage[1]
 
-    query[message.chat.id] = (first, second)
+    # masukan variable yang berisi query dan format ke dalam variable global
+    query[message.chat.id] = (first, second, first_format, second_format)
 
     file_name = file_handler(message)
 

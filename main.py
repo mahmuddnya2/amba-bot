@@ -43,7 +43,11 @@ def handle_limit_input(message):
         else:
             first = query[chat_id][0]
             second = query[chat_id][1]
-            format_process(file_name, limit, chat_id, first, second)
+            first_format = query[chat_id][2]
+            second_format = query[chat_id][3]
+            format_process(
+                file_name, limit, chat_id, first, second, first_format, second_format
+            )
 
         # Hapus entry pengguna setelah selesai
         del user_limits[chat_id]
